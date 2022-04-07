@@ -1,12 +1,30 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { getAccessToken, useUser } from '@auth0/nextjs-auth0';
+import type { GetServerSideProps, NextPage } from 'next'
 
 const Home: NextPage = () => {
+  const { user } = useUser();
+
   return (
-    <h1>Hello world!!</h1>
+    <div>
+      <h1>Hello world!!</h1>
+
+      <pre>
+        {JSON.stringify(user, null, 2)}
+      </pre>
+      <a href="/api/auth/login">Login</a>
+    </div>
   )
 }
 
 export default Home
+
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const token = getAccessToken(req, res);
+
+  console.log(token)
+
+  return {
+    props: {}
+  }
+}
