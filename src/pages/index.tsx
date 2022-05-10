@@ -1,12 +1,12 @@
 import { getSession, getAccessToken } from '@auth0/nextjs-auth0';
 import type { GetServerSideProps, NextPage } from 'next'
+import { withApollo } from '../lib/withApollo';
 
 const Home: NextPage = () => {
 
   return null;
 }
 
-export default Home
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -32,3 +32,5 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   }
 }
+
+export default withApollo(Home)
